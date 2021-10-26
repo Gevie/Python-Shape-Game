@@ -22,7 +22,6 @@ def load_shapes():
 
 
 def draw():
-    title = pygame.draw.rect(SCREEN, (0, 0, 0), (20, 20, 760, 96))
     clear_drawings = pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
 
     random.shuffle(shapes)
@@ -37,6 +36,13 @@ def draw():
             pygame.draw.circle(SCREEN, shape.colour, position, shape.radius)
         elif shape.method == 'polygon':
             pygame.draw.polygon(SCREEN, shape.colour, position)
+
+    winning_shape = shapes[0]
+
+    font = pygame.font.Font(None, 48)
+    text = font.render(f"Please select the {winning_shape.type}", True, (255, 255, 255))
+    text_rect = text.get_rect(center=(400, 50))
+    SCREEN.blit(text, text_rect)
 
 
 shapes = load_shapes()
