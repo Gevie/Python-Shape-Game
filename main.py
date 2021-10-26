@@ -10,6 +10,8 @@ os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 
 def load_shapes():
+    """Load the shapes from the json file and use a factory to create instances"""
+
     factory.register("rectangle", Rectangle)
     factory.register("circle", Circle)
     factory.register("triangle", Triangle)
@@ -22,7 +24,9 @@ def load_shapes():
 
 
 def draw_end_game():
+    """Draw the end game screen"""
     pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
+
     font = pygame.font.Font(None, 48)
     text = font.render("Thank you for your time.", True, (255, 255, 255))
     text_rect = text.get_rect(center=(400, 300))
@@ -30,6 +34,7 @@ def draw_end_game():
 
 
 def draw() -> Shape:
+    """Draw the next round screen and return the chosen shape"""
     pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
 
     random.shuffle(shapes)
@@ -46,9 +51,8 @@ def draw() -> Shape:
             pygame.draw.polygon(SCREEN, shape.colour, position)
 
     target_shape = shapes[random.randint(0, 3)]
-    if "last_shape" in locals():
-        while target_shape.method == last_shape:
-            target_shape = shapes[random.randint(0, 3)]
+    while target_shape.method == last_shape:
+        target_shape = shapes[random.randint(0, 3)]
 
     font = pygame.font.Font(None, 48)
     text = font.render(f"{current_round}. Please select the {target_shape.type}", True, (255, 255, 255))
@@ -71,7 +75,9 @@ pygame.time.set_timer(generate_new_round, 5000)
 max_rounds = 24
 current_round = 1
 
+last_shape = None
 winning_shape = draw()
+clickable = True
 last_shape = winning_shape.type
 
 while True:
@@ -86,11 +92,13 @@ while True:
             if current_round > 24:
                 draw_end_game()
             else:
+                clickable = True
                 winning_shape = draw()
 
-        if events.type == pygame.MOUSEBUTTONDOWN and current_round <= 24:
+        if events.type == pygame.MOUSEBUTTONDOWN and current_round <= 24 and clickable is True:
             clicked = SCREEN.get_at(pygame.mouse.get_pos())
             if clicked == winning_shape.colour:
+                clickable = False
                 print(f"You clicked the {winning_shape.type} successfully.")
 
     pygame.display.update()
