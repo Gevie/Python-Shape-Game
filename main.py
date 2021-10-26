@@ -4,6 +4,7 @@ import random
 import sys
 import pygame
 import factory
+import loader
 from shape import Rectangle, Circle, Triangle, Parallelogram, Shape
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -19,6 +20,7 @@ def load_shapes():
 
     with open('./shapes.json') as file:
         data = json.load(file)
+        loader.load_plugins(data["plugins"])
 
     return [factory.create(item) for item in data["shapes"]]
 
@@ -39,6 +41,9 @@ def draw() -> Shape:
 
     random.shuffle(shapes)
     for index, shape in enumerate(shapes):
+        if index > 3:
+            break
+
         position = shape.map(positions[index])
 
         # TODO: Fix the issue with pygame and being able to draw the shape from the shape class
@@ -49,6 +54,8 @@ def draw() -> Shape:
             pygame.draw.circle(SCREEN, shape.colour, position, shape.radius)
         elif shape.method == 'polygon':
             pygame.draw.polygon(SCREEN, shape.colour, position)
+        elif shape.method == 'line':
+            pygame.draw.line(SCREEN, shape.colour, position[0], position[1], shape.radius)
 
     target_shape = shapes[random.randint(0, 3)]
     while target_shape.method == last_shape:
@@ -78,7 +85,6 @@ current_round = 1
 last_shape = None
 winning_shape = draw()
 clickable = True
-last_shape = winning_shape.type
 
 while True:
     for events in pygame.event.get():
@@ -94,6 +100,7 @@ while True:
             else:
                 clickable = True
                 winning_shape = draw()
+                last_shape = winning_shape.type
 
         if events.type == pygame.MOUSEBUTTONDOWN and current_round <= 24 and clickable is True:
             clicked = SCREEN.get_at(pygame.mouse.get_pos())

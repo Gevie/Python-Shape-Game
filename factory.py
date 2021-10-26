@@ -23,6 +23,8 @@ def create(arguments: dict[str, Any]) -> Shape:
     rgb = arguments_copy.pop('rgb')
     arguments['colour'] = (rgb[0], rgb[1], rgb[2])
 
+    print(arguments)
+
     try:
         creation_function = shape_creation_functions[shape_type]
         return creation_function(**arguments)
