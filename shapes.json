@@ -1,0 +1,49 @@
+{
+  "shapes": [
+    {
+      "type": "rectangle",
+      "method": "rect",
+      "colour": [0, 176, 240],
+      "positions": {
+        "top_left": [105, 192, 200, 100],
+        "top_right": [495, 192, 200, 100],
+        "bottom_left": [105, 424, 200, 100],
+        "bottom_right": [495, 424, 200, 100]
+      }
+    },
+    {
+      "type": "triangle",
+      "method": "polygon",
+      "colour": [255, 255, 0],
+      "positions": {
+        "top_left": [[100, 300], [200, 175], [300, 300]],
+        "top_right": [[500, 300], [600, 175], [700, 300]],
+        "bottom_left": [[100, 525], [200, 400], [300, 525]],
+        "bottom_right": [[500, 525], [600, 400], [700, 525]]
+      }
+    },
+    {
+      "type": "circle",
+      "method": "circle",
+      "radius": 75,
+      "colour": [146, 208, 80],
+      "positions": {
+        "top_left": [205, 240],
+        "top_right": [600, 240],
+        "bottom_left": [205, 475],
+        "bottom_right": [600, 475]
+      }
+    },
+    {
+      "type": "parallelogram",
+      "method": "polygon",
+      "colour": [0, 0, 0],
+      "positions": {
+        "top_left": [[125, 290], [250, 290], [300, 190], [175, 190]],
+        "top_right": [[500, 290], [625, 290], [675, 190], [550, 190]],
+        "bottom_left": [[125, 525], [250, 525], [300, 425], [175, 425]],
+        "bottom_right": [[500, 525], [625, 525], [675, 425], [550, 425]]
+      }
+    }
+  ]
+}
