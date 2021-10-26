@@ -1,27 +1,32 @@
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Protocol, Any, Union
 
 
 class Shape(Protocol):
     """Represents a shape"""
+    type: str
+    rgb: list
+    colour: tuple
     method: str
+    positions: dict
+    radius: int
 
-    def draw(self, position: str) -> list:
-        """Draw the shape on the screen"""
+    def map(self, position: str) -> Union[list[tuple[Any, Any]], tuple]:
+        """Map the shape to the screen"""
 
 
 @dataclass()
 class Rectangle(Shape):
     """Represents a rectangle"""
     type: str
-    colour: list
+    rgb: list
+    colour: tuple
     method: str
     positions: dict
 
-    def draw(self, position: str) -> list:
+    def map(self, position: str) -> Union[list[tuple[Any, Any]], tuple]:
         """Draw the shape on the screen"""
 
-        colour = (self.colour[0], self.colour[1], self.colour[2])
         rect = (
             self.positions[position][0],
             self.positions[position][1],
@@ -29,63 +34,63 @@ class Rectangle(Shape):
             self.positions[position][3]
         )
 
-        return [colour, rect]
+        return rect
 
 
 @dataclass
 class Circle(Shape):
     """Represents a circle"""
     type: str
-    colour: list
+    rgb: list
+    colour: tuple
     method: str
     positions: dict
     radius: int
 
-    def draw(self, position: str) -> list:
+    def map(self, position: str) -> Union[list[tuple[Any, Any]], tuple]:
         """Draw the shape on the screen"""
 
-        colour = (self.colour[0], self.colour[1], self.colour[2])
         circle = (
             self.positions[position][0],
             self.positions[position][1]
         )
 
-        return [colour, circle, self.radius]
+        return circle
 
 
 @dataclass
 class Triangle(Shape):
     """Represents a triangle"""
     type: str
-    colour: list
+    rgb: list
+    colour: tuple
     method: str
     positions: dict
 
-    def draw(self, position: str) -> list:
+    def map(self, position: str) -> Union[list[tuple[Any, Any]], tuple]:
         """Draw the shape on the screen"""
 
-        colour = (self.colour[0], self.colour[1], self.colour[2])
         polygon = [
             (self.positions[position][0][0], self.positions[position][0][1]),
             (self.positions[position][1][0], self.positions[position][1][1]),
             (self.positions[position][2][0], self.positions[position][2][1]),
         ]
 
-        return [colour, polygon]
+        return polygon
 
 
 @dataclass
 class Parallelogram(Shape):
     """Represents a parallelogram"""
     type: str
-    colour: list
+    rgb: list
+    colour: tuple
     method: str
     positions: dict
 
-    def draw(self, position: str) -> list:
+    def map(self, position: str) -> Union[list[tuple[Any, Any]], tuple]:
         """Draw the shape on the screen"""
 
-        colour = (self.colour[0], self.colour[1], self.colour[2])
         polygon = [
             (self.positions[position][0][0], self.positions[position][0][1]),
             (self.positions[position][1][0], self.positions[position][1][1]),
@@ -93,4 +98,4 @@ class Parallelogram(Shape):
             (self.positions[position][3][0], self.positions[position][3][1]),
         ]
 
-        return [colour, polygon]
+        return polygon
