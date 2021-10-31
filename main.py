@@ -132,6 +132,9 @@ positions = ["top_left", "top_right", "bottom_left", "bottom_right"]
 subject_ID = input('Insert Subject ID')
 subject = Subject(subject_ID, date.today(), {})
 subject.create_data_template()
+Round = Round(['Game', 'SingleChoiceGame', 'Stimulation'], 1, 0, 12, 'Game', 'Baseline')
+SimpleRecording = SimpleRecording()
+Instance = Instance(subject, SimpleRecording, Round)
 
 
 start = 0
