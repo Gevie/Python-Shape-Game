@@ -12,6 +12,8 @@ from recording import SimpleRecording
 from subject import Round
 from subject import Instance
 from subject import Subject
+from datetime import date
+import time
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
@@ -127,6 +129,11 @@ def draw_whitespace(drawing: Drawing):
 shapes = load_shapes()
 positions = ["top_left", "top_right", "bottom_left", "bottom_right"]
 
+subject_ID = input('Insert Subject ID')
+subject = Subject(subject_ID, date.today(), {})
+subject.create_data_template()
+time.sleep(5)
+
 pygame.init()
 SCREEN = pygame.display.set_mode((800, 600))
 
@@ -138,14 +145,12 @@ max_rounds = 81
 current_round = 1
 whitespace_rounds = [25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61,
                      62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80]
+drawing = Drawing()
 last_shape = None
-winning_shape = draw()
-single_shape = draw(True)
+winning_shape = draw(drawing)
+single_shape = draw(drawing, True)
 clickable = True
-subject_ID = input('Insert Subject ID')
-subject = Subject()
-subject.id = subject_ID
-subject.create_data_template()
+
 
 while True:
     for events in pygame.event.get():
@@ -156,19 +161,19 @@ while True:
         if events.type == generate_new_round and current_round <= 24:
             current_round = current_round + 1
 
-            if current_round > 44:
+            if current_round > 81:
                 Instance.save_results()
                 draw_end_game()
             if current_round < 12:
                 Round.set_stage('Game')
                 clickable = True
-                winning_shape = draw()
+                winning_shape = draw(drawing, False)
                 last_shape = winning_shape.type
                 continue
             if 12 < current_round < 24:
                 Round.set_stage('SingleChoiceGame')
                 clickable = True
-                single_shape = draw(True)
+                single_shape = draw(drawing, True)
                 last_shape = single_shape.type
                 continue
 
@@ -188,7 +193,7 @@ while True:
                 Instance.add_timestamp()
             continue
 
-        if 24 < current_round < 44:
+        if 24 < current_round <= 81:
             if current_round not in whitespace_rounds:
                 iap = draw_third_stage()
                 Round.iap = iap
