@@ -85,7 +85,7 @@ def draw(drawing: Drawing, single_shape: bool = False) -> Shape:
     drawing.clear_screen()
 
     random.shuffle(shapes)
-    if single_shape == True:
+    if single_shape:
         drawing.draw_shape(shapes[0], shapes[0].map(positions[random.randint(0, 3)]))
         target_shape = shapes[0]
     else:
@@ -157,7 +157,7 @@ whitespace_rounds = [25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46,
 drawing = Drawing()
 last_shape = None
 winning_shape = draw(drawing)
-single_shape = draw(drawing, True)
+#single_shape = draw(drawing, True)
 clickable = True
 
 
