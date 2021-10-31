@@ -85,7 +85,7 @@ def draw(drawing: Drawing, single_shape: bool = False) -> Shape:
     drawing.clear_screen()
 
     random.shuffle(shapes)
-    if single_shape:
+    if single_shape == True:
         drawing.draw_shape(shapes[0], shapes[0].map(positions[random.randint(0, 3)]))
         target_shape = shapes[0]
     else:
@@ -132,10 +132,19 @@ positions = ["top_left", "top_right", "bottom_left", "bottom_right"]
 subject_ID = input('Insert Subject ID')
 subject = Subject(subject_ID, date.today(), {})
 subject.create_data_template()
-time.sleep(5)
+
+
+start = 0
+while start == 0:
+    start = input('Ready to start the window? (1 - yes, 0 - no)')
 
 pygame.init()
 SCREEN = pygame.display.set_mode((800, 600))
+
+position_right = 0
+while position_right == 0:
+    position_right = input('Is the window correctly positioned? (1 - yes, 0 - no)')
+time.sleep(5)
 
 # TODO: Build structure / classes to handle events better
 generate_new_round = pygame.USEREVENT + 1
