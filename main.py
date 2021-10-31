@@ -153,7 +153,7 @@ while True:
                 continue
             if 12 < current_round < 24:
                 clickable = True
-                winning_shape = draw_second_stage()
+                single_shape = draw(True)
                 last_shape = winning_shape.type
                 continue
 
