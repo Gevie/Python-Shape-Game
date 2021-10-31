@@ -6,18 +6,51 @@ import pygame
 import factory
 import loader
 from shape import Rectangle, Circle, Triangle, Parallelogram, Shape
-from classes import ManageTimestamps
 from PIL import Image
 import glob
-import time
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
-data_management = ManageTimestamps
-data_management.initialize_test()
 
-def load_shapes():
-    """Load the shapes from the json file and use a factory to create instances"""
+class Drawing:
+    @staticmethod
+    def clear_screen(colour: tuple = (0, 0, 0), width: int = 800, height: int = 600):
+        pygame.draw.rect(SCREEN, colour, (0, 0, width, height))
+
+    @staticmethod
+    def draw_center_text(text: str):
+        font = pygame.font.Font(None, 48)
+        text = font.render(text, True, (255, 255, 255))
+        text_rect = text.get_rect(center=(400, 300))
+        SCREEN.blit(text, text_rect)
+
+    @staticmethod
+    def draw_shape(shape: Shape, position):
+        if shape.method == 'rect':
+            pygame.draw.rect(SCREEN, shape.colour, position)
+        elif shape.method == 'circle':
+            pygame.draw.circle(SCREEN, shape.colour, position, shape.radius)
+        elif shape.method == 'polygon':
+            pygame.draw.polygon(SCREEN, shape.colour, position)
+
+    def draw_image(self, image: Image):
+        pass
+
+    @staticmethod
+    def draw_heading(text: str):
+        font = pygame.font.Font(None, 48)
+        text = font.render(text, True, (255, 255, 255))
+        text_rect = text.get_rect(center=(400, 50))
+        SCREEN.blit(text, text_rect)
+
+
+def load_shapes() -> list:
+    """
+    Load the shapes from the json file and use a factory to create instances
+
+    Returns:
+        list: A list of shape objects
+    """
 
     factory.register("rectangle", Rectangle)
     factory.register("circle", Circle)
@@ -31,102 +64,56 @@ def load_shapes():
     return [factory.create(item) for item in data["shapes"]]
 
 
-def draw_end_game():
-    """Draw the end game screen"""
-    pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
-
-    font = pygame.font.Font(None, 48)
-    text = font.render("Thank you for your time.", True, (255, 255, 255))
-    text_rect = text.get_rect(center=(400, 300))
-    SCREEN.blit(text, text_rect)
+def draw_end_game(drawing: Drawing):
+    drawing.clear_screen()
+    drawing.draw_center_text('Thank you for your time')
 
 
-def draw() -> Shape:
-    """Draw the next round screen and return the chosen shape"""
-    pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
+def draw(drawing: Drawing, single_shape: bool = False) -> Shape:
+    drawing.clear_screen()
 
     random.shuffle(shapes)
-    for index, shape in enumerate(shapes):
-        if index > 3:
-            break
+    if single_shape:
+        drawing.draw_shape(shapes[0], shapes[0].map(positions[random.randint(0, 3)]))
+        target_shape = shapes[0]
+    else:
+        for index, shape in enumerate(shapes):
+            if index > 3:
+                break
 
-        position = shape.map(positions[index])
+            position = shape.map(positions[index])
+            drawing.draw_shape(shape, position)
 
-        # TODO: Fix the issue with pygame and being able to draw the shape from the shape class
-        # TODO: This is a dirty hack because of the 24 hour deadline from start to finish
-        if shape.method == 'rect':
-            pygame.draw.rect(SCREEN, shape.colour, position)
-        elif shape.method == 'circle':
-            pygame.draw.circle(SCREEN, shape.colour, position, shape.radius)
-        elif shape.method == 'polygon':
-            pygame.draw.polygon(SCREEN, shape.colour, position)
-        elif shape.method == 'line':
-            pygame.draw.line(SCREEN, shape.colour, position[0], position[1], shape.radius)
-
-    target_shape = shapes[random.randint(0, 3)]
-    while target_shape.method == last_shape:
         target_shape = shapes[random.randint(0, 3)]
+        while target_shape.method == last_shape:
+            target_shape = shapes[random.randint(0, 3)]
 
-    font = pygame.font.Font(None, 48)
-    text = font.render(f"{current_round}. Please select the {target_shape.type}", True, (255, 255, 255))
-    text_rect = text.get_rect(center=(400, 50))
-    SCREEN.blit(text, text_rect)
+    heading = f'{current_round}. Please select the {target_shape.type}'
+    drawing.draw_heading(heading)
 
     return target_shape
 
 
-def draw_second_stage() -> Shape:
+def draw_third_stage(drawing: Drawing) -> Shape:
     """Draw the next round screen and return the chosen shape"""
-    pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
+    drawing.clear_screen()
+    path = './IAPS/*.jpg'
 
-    random.shuffle(shapes)
-    for index, shape in enumerate(shapes):
-        if index > 0:
-            break
-
-        position = shape.map(positions[index])
-
-        # TODO: Fix the issue with pygame and being able to draw the shape from the shape class
-        # TODO: This is a dirty hack because of the 24 hour deadline from start to finish
-        if shape.method == 'rect':
-            pygame.draw.rect(SCREEN, shape.colour, position)
-        elif shape.method == 'circle':
-            pygame.draw.circle(SCREEN, shape.colour, position, shape.radius)
-        elif shape.method == 'polygon':
-            pygame.draw.polygon(SCREEN, shape.colour, position)
-        elif shape.method == 'line':
-            pygame.draw.line(SCREEN, shape.colour, position[0], position[1], shape.radius)
-
-    target_shape = shapes[random.randint(0, 3)]
-    while target_shape.method == last_shape:
-        target_shape = shapes[random.randint(0, 3)]
-
-    font = pygame.font.Font(None, 48)
-    text = font.render(f"{current_round}. Please select the {target_shape.type}", True, (255, 255, 255))
-    text_rect = text.get_rect(center=(400, 50))
-    SCREEN.blit(text, text_rect)
-
-    return target_shape
-
-
-def draw_third_stage() -> Shape:
-    """Draw the next round screen and return the chosen shape"""
-    pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
-    path = '*/IAPS/*.jpg'
     IAPS = []
     for filename in glob.glob(path):
         IAPS.append(filename)
-    figure = random.choice.pop(IAPS) # TODO: figure out if this is correct use
+
+    random.shuffle(IAPS)
+    figure = IAPS.pop()
+
     image = pygame.image.load(figure)
-    SCREEN.fill(0, 0, 0)
     SCREEN.blit(image, (0, 0))
     return figure
 
-# TODO: clear method
-def draw_whitespace():
+
+def draw_whitespace(drawing: Drawing):
     """Draw the next round screen and return the chosen shape"""
-    pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
-    SCREEN.fill(255, 255, 255)
+    drawing.clear_screen((255, 255, 255))
 
 
 shapes = load_shapes()

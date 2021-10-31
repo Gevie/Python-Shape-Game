@@ -171,5 +171,6 @@ class Instance:
         Returns:
             None
         """
+
         self.recording_handler.tear_down()
         self.subject.save()
