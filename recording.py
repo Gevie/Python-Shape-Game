@@ -32,7 +32,7 @@ class SimpleRecording(RecordingInterface):
     """
     Recording timestamps using a the python time library
 
-    This is a simple way to get timestamps, it does not align with the any type of
+    This is a simple way to get timestamps, it does not align with any type of
     ECG and EEG recordings and is a more simple but accessible implementation
     """
 
