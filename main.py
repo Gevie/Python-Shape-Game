@@ -115,9 +115,11 @@ def draw_third_stage(drawing: Drawing) -> Shape:
     # TODO: improve way to retrieve which image we are using
     image = pygame.image.load(figure)
     SCREEN.blit(image, (0, 0))
-    file1 = figure.replace('./IAPS\\', '')
-    file2 = file1.replace('.jpeg', '')
-    iap = int(file2)
+    #figure = figure.replace('./IAPS\\', '')
+    #figure = figure.replace('.jpeg', '')
+    #iap = int(figure)
+    im = Image.open(filename)
+    iap = im.filename
     return iap
 
 
@@ -128,7 +130,7 @@ def draw_whitespace(drawing: Drawing):
 
 shapes = load_shapes()
 positions = ["top_left", "top_right", "bottom_left", "bottom_right"]
-
+# TODO: make inputs nicer
 subject_ID = input('Insert Subject ID')
 subject = Subject(subject_ID, date.today(), {})
 subject.create_data_template()
@@ -141,6 +143,7 @@ start = 0
 while start == 0:
     start = input('Ready to start the window? (1 - yes, 0 - no)')
 
+# TODO: windows needs to be fullscreened
 pygame.init()
 SCREEN = pygame.display.set_mode((800, 600))
 
@@ -170,19 +173,19 @@ while True:
             pygame.quit()
             sys.exit()
 
-        if events.type == generate_new_round and current_round <= 24:
+        if events.type == generate_new_round and current_round <= 81:
             current_round = current_round + 1
 
             if current_round > 81:
                 Instance.save_results()
                 draw_end_game()
-            if current_round < 12:
+            if current_round <= 12:
                 Round.set_stage('Game')
                 clickable = True
                 winning_shape = draw(drawing, False)
                 last_shape = winning_shape.type
                 continue
-            if 12 < current_round < 24:
+            if 12 < current_round <= 24:
                 Round.set_stage('SingleChoiceGame')
                 clickable = True
                 single_shape = draw(drawing, True)
@@ -205,16 +208,16 @@ while True:
                 Instance.add_timestamp()
             continue
 
-        if 24 < current_round <= 81:
+        if 25 <= current_round <= 81:
             if current_round not in whitespace_rounds:
-                iap = draw_third_stage()
+                iap = draw_third_stage(drawing)
                 Round.iap = iap
                 Round.switch_stimulation_type()
                 Instance.add_timestamp()
-                continue
+                # TODO: figure out how many rounds there are gonna be
             if current_round in whitespace_rounds:
                 Round.switch_stimulation_type()
                 Instance.add_timestamp()
-                draw_whitespace()
-                continue
+                draw_whitespace(drawing)
+
     pygame.display.update()
