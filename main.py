@@ -11,6 +11,13 @@ import glob
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
+path = './IAPS/*.jpg'
+
+IAPS = []
+for filename in glob.glob(path):
+    IAPS.append(filename)
+
+
 
 class Drawing:
     @staticmethod
@@ -97,11 +104,6 @@ def draw(drawing: Drawing, single_shape: bool = False) -> Shape:
 def draw_third_stage(drawing: Drawing) -> Shape:
     """Draw the next round screen and return the chosen shape"""
     drawing.clear_screen()
-    path = './IAPS/*.jpg'
-
-    IAPS = []
-    for filename in glob.glob(path):
-        IAPS.append(filename)
 
     random.shuffle(IAPS)
     figure = IAPS.pop()
