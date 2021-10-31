@@ -20,7 +20,6 @@ path = './IAPS/*.jpg'
 IAPS = []
 for filename in glob.glob(path):
     IAPS.append(filename)
-    print(filename)
 
 
 class Drawing:
@@ -114,7 +113,10 @@ def draw_third_stage(drawing: Drawing) -> Shape:
     # TODO: improve way to retrieve which image we are using
     image = pygame.image.load(figure)
     SCREEN.blit(image, (0, 0))
-    return figure
+    file1 = figure.replace('./IAPS\\', '')
+    file2 = file1.replace('.jpeg', '')
+    iap = int(file2)
+    return iap
 
 
 def draw_whitespace(drawing: Drawing):
@@ -164,6 +166,7 @@ while True:
                 last_shape = winning_shape.type
                 continue
             if 12 < current_round < 24:
+                Round.set_stage('SingleChoiceGame')
                 clickable = True
                 single_shape = draw(True)
                 last_shape = single_shape.type
@@ -187,13 +190,14 @@ while True:
 
         if 24 < current_round < 44:
             if current_round not in whitespace_rounds:
-                file = draw_third_stage()
-                Round.iap = file
+                iap = draw_third_stage()
+                Round.iap = iap
                 Round.switch_stimulation_type()
+                Instance.add_timestamp()
                 continue
             if current_round in whitespace_rounds:
-                stage = 'Baseline'
-                data_management.create_timestamp(stage)
+                Round.switch_stimulation_type()
+                Instance.add_timestamp()
                 draw_whitespace()
                 continue
     pygame.display.update()
