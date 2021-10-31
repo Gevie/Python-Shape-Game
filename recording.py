@@ -3,24 +3,44 @@ from abc import ABC, abstractmethod
 
 
 class RecordingInterface(ABC):
-    """The recording interface, used for gathering timestamps"""
+    """
+    The recording interface
+
+    This is used to be able to get timestamps when actions are taken
+    """
 
     @abstractmethod
     def get_timestamp(self) -> str:
-        """Get the current timestamp"""
+        """
+        Get the current timestamp
+
+        Returns:
+            str: The timestamp as a string
+        """
 
     @abstractmethod
     def tear_down(self) -> None:
-        """End the recording interface"""
+        """
+        End the recording interface
+
+        Returns:
+            None
+        """
 
 
 class SimpleRecording(RecordingInterface):
-    """A simple recording class for getting milliseconds since the game started"""
+    """
+    Recording timestamps using a the python time library
+
+    This is a simple way to get timestamps, it does not align with the any type of
+    ECG and EEG recordings and is a more simple but accessible implementation
+    """
 
     def __init__(self):
         """
         Initialize the class
         """
+
         self.start_time = self.__get_current_timestamp()
 
     @staticmethod
@@ -31,6 +51,7 @@ class SimpleRecording(RecordingInterface):
         Returns:
             int: The number of milliseconds
         """
+
         return round(time.time() * 1000)
 
     def get_timestamp(self) -> str:
@@ -40,6 +61,7 @@ class SimpleRecording(RecordingInterface):
         Returns:
             str: The number of milliseconds since the game started
         """
+
         return str(self.start_time - self.__get_current_timestamp())
 
     def tear_down(self) -> None:
@@ -49,10 +71,18 @@ class SimpleRecording(RecordingInterface):
         Returns:
             None
         """
+
         pass
 
 
 class BioPlusRecording(RecordingInterface):
+    """
+    Recording timestamps with the BioPlus library
+
+    This is used to be able to compare timestamps with BioPlus EEG and ECG
+    recordings taken when the game is played.
+    """
+
     def __init__(self):
         """
         Initialize the class
@@ -63,10 +93,10 @@ class BioPlusRecording(RecordingInterface):
 
     def get_timestamp(self) -> str:
         """
-        Get the timestamp since the game using the bioplus library
+        Get the timestamp since the game started using the BioPlus library
 
         Returns:
-            str: The bioplus timestamp
+            str: The BioPlus timestamp
         """
 
         # return bp.get_timestamp()
