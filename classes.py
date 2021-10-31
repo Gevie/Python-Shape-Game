@@ -8,10 +8,8 @@ from datetime import date
 @dataclass
 class Subject:
     Subject_ID: int
-    Subject_ID = '0'
-    Subject_Test_Date = date.today()
-    Subject_Key = f'{Subject_ID}({Subject_Test_Date})'
-
+    Subject_Test_Date: date
+    Subject_key: dict
 
 class SubjectHandle(Subject):
     def identify_subject(self):
@@ -22,10 +20,15 @@ class SubjectHandle(Subject):
             raise ValueError('The Subjects ID must be an integer')
             self.identify_subject()
 
+    def get_date(self):
+        self.Subject_Test_Date = date.today()
+        return self.Subject_Test_Date
+
     def get_subject_id(self):
         return self.Subject_ID
 
     def get_subject(self):
+        self.Subject_Key = f'{self.Subject_ID}({self.Subject_Test_Date})'
         return self.Subject_Key
 
 
@@ -54,6 +57,7 @@ class TestDataHandler(TestData):
 
 @dataclass
 class TimeStamps(TestDataHandler):
+    # TODO: figure out better init method for this?
     timestamp: int or float or str
     ts_dict: dict
     stage: str

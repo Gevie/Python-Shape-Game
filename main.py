@@ -11,21 +11,10 @@ from PIL import Image
 import glob
 import time
 
-print('1')
-
 os.environ["SDL_VIDEO_CENTERED"] = "1"
-
-print('2')
-
-picked_IAPS = []
-
-print('3')
 
 data_management = ManageTimestamps
 data_management.initialize_test()
-
-print('4')
-
 
 def load_shapes():
     """Load the shapes from the json file and use a factory to create instances"""
@@ -123,43 +112,32 @@ def draw_second_stage() -> Shape:
 def draw_third_stage() -> Shape:
     """Draw the next round screen and return the chosen shape"""
     pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
-    path = 'D:\pedro\Documents\Tese\data_collect_py\IAPS/*.jpg'
+    path = '*/IAPS/*.jpg'
     IAPS = []
     for filename in glob.glob(path):
         IAPS.append(filename)
-    figure = random.choice(IAPS)
-    if figure in picked_IAPS:
-        while figure in picked_IAPS:
-            figure = random.choice(IAPS)
+    figure = random.choice.pop(IAPS) # TODO: figure out if this is correct use
     image = pygame.image.load(figure)
     SCREEN.fill(0, 0, 0)
     SCREEN.blit(image, (0, 0))
     return figure
 
-
+# TODO: clear method
 def draw_whitespace():
     """Draw the next round screen and return the chosen shape"""
     pygame.draw.rect(SCREEN, (0, 0, 0), (0, 0, 800, 600))
     SCREEN.fill(255, 255, 255)
 
 
-print('5')
-
 shapes = load_shapes()
 positions = ["top_left", "top_right", "bottom_left", "bottom_right"]
-
-print('6')
 
 pygame.init()
 SCREEN = pygame.display.set_mode((800, 600))
 
-print('7')
-
 # TODO: Build structure / classes to handle events better
 generate_new_round = pygame.USEREVENT + 1
 pygame.time.set_timer(generate_new_round, 5000)
-
-print('8')
 
 max_rounds = 81
 current_round = 1
@@ -168,8 +146,6 @@ whitespace_rounds = [25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46,
 last_shape = None
 winning_shape = draw()
 clickable = True
-
-print('9')
 
 while True:
     for events in pygame.event.get():
@@ -219,4 +195,3 @@ while True:
                 continue
     pygame.display.update()
 
-print('10')
