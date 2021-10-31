@@ -8,6 +8,10 @@ import loader
 from shape import Rectangle, Circle, Triangle, Parallelogram, Shape
 from PIL import Image
 import glob
+from recording import SimpleRecording
+from subject import Round
+from subject import Instance
+from subject import Subject
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
@@ -16,7 +20,6 @@ path = './IAPS/*.jpg'
 IAPS = []
 for filename in glob.glob(path):
     IAPS.append(filename)
-
 
 
 class Drawing:
@@ -107,7 +110,7 @@ def draw_third_stage(drawing: Drawing) -> Shape:
 
     random.shuffle(IAPS)
     figure = IAPS.pop()
-
+    # TODO: improve way to retrieve which image we are using
     image = pygame.image.load(figure)
     SCREEN.blit(image, (0, 0))
     return figure
@@ -134,7 +137,12 @@ whitespace_rounds = [25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46,
                      62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80]
 last_shape = None
 winning_shape = draw()
+single_shape = draw(True)
 clickable = True
+subject_ID = input('Insert Subject ID')
+subject = Subject()
+subject.id = subject_ID
+subject.create_data_template()
 
 while True:
     for events in pygame.event.get():
@@ -146,9 +154,10 @@ while True:
             current_round = current_round + 1
 
             if current_round > 44:
-                data_management.database_commit()
+                Instance.save_results()
                 draw_end_game()
             if current_round < 12:
+                Round.set_stage('Game')
                 clickable = True
                 winning_shape = draw()
                 last_shape = winning_shape.type
@@ -156,26 +165,30 @@ while True:
             if 12 < current_round < 24:
                 clickable = True
                 single_shape = draw(True)
-                last_shape = winning_shape.type
+                last_shape = single_shape.type
                 continue
 
-        if events.type == pygame.MOUSEBUTTONDOWN and current_round <= 24 and clickable is True:
+        if events.type == pygame.MOUSEBUTTONDOWN and current_round <= 12 and clickable is True:
             clicked = SCREEN.get_at(pygame.mouse.get_pos())
             if clicked == winning_shape.colour:
                 clickable = False
                 print(f"You clicked the {winning_shape.type} successfully.")
-                if current_round == 1:
-                    stage = 'Baseline'
-                    data_management.create_timestamp(stage)
+                Instance.add_timestamp()
+            continue
 
-                else:
-                    stage = f'Q{current_round}'
-                    data_management.create_timestamp(stage)
+        if events.type == pygame.MOUSEBUTTONDOWN and 12 < current_round <= 24 and clickable is True:
+            clicked = SCREEN.get_at(pygame.mouse.get_pos())
+            if clicked == single_shape.colour:
+                clickable = False
+                print(f"You clicked the {single_shape.type} successfully.")
+                Instance.add_timestamp()
+            continue
+
         if 24 < current_round < 44:
             if current_round not in whitespace_rounds:
                 file = draw_third_stage()
-                stage = f'IAPS{current_round}'
-                data_management.create_timestamp(stage)
+                Round.iap = file
+                Round.switch_stimulation_type()
                 continue
             if current_round in whitespace_rounds:
                 stage = 'Baseline'
@@ -183,4 +196,3 @@ while True:
                 draw_whitespace()
                 continue
     pygame.display.update()
-
