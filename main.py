@@ -20,6 +20,7 @@ path = './IAPS/*.jpg'
 IAPS = []
 for filename in glob.glob(path):
     IAPS.append(filename)
+    print(filename)
 
 
 class Drawing:
