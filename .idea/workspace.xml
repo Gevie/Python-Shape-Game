@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="821dbbda-ce09-4c1f-b8e0-d71961b8bea2" name="Changes" comment="FUCKIN GOT THE GAME RUNNING SUCK IT PYTHON">
+    <list default="true" id="821dbbda-ce09-4c1f-b8e0-d71961b8bea2" name="Changes" comment="got program running in full. look at TODOs">
+      <change afterPath="$PROJECT_DIR$/timestamps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes.json" beforeDir="false" afterPath="$PROJECT_DIR$/shapes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subject.py" beforeDir="false" afterPath="$PROJECT_DIR$/subject.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +118,35 @@
       <option name="project" value="LOCAL" />
       <updated>1635700242252</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="got the window running, made some rudimentary ui, which isn't working">
+      <created>1635701256706</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1635701256706</updated>
+    </task>
+    <task id="LOCAL-00009" summary="got the window running, made some rudimentary ui, which isn't working">
+      <created>1635701345043</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1635701345043</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fixed it, I fucking fixed it. Queue &quot;Sonubitch, he did it, he really did it&quot;">
+      <created>1635703143516</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1635703143516</updated>
+    </task>
+    <task id="LOCAL-00011" summary="got program running in full. look at TODOs">
+      <created>1635707187040</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1635707187040</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +181,9 @@
     <MESSAGE value="testing how filename is retrieved" />
     <MESSAGE value="fixed how we retrieve iap. introduced that into the loop" />
     <MESSAGE value="FUCKIN GOT THE GAME RUNNING SUCK IT PYTHON" />
-    <option name="LAST_COMMIT_MESSAGE" value="FUCKIN GOT THE GAME RUNNING SUCK IT PYTHON" />
+    <MESSAGE value="got the window running, made some rudimentary ui, which isn't working" />
+    <MESSAGE value="fixed it, I fucking fixed it. Queue &quot;Sonubitch, he did it, he really did it&quot;" />
+    <MESSAGE value="got program running in full. look at TODOs" />
+    <option name="LAST_COMMIT_MESSAGE" value="got program running in full. look at TODOs" />
   </component>
 </project>

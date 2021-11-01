@@ -130,7 +130,7 @@ class Subject:
             None
         """
 
-        subject_file = open(f'{self.get_key()}.json', 'w')
+        subject_file = open('timestamps.json', 'w')
         json.dump(self.data, subject_file, ensure_ascii=False, indent='\t', separators=(',', ':'))
         subject_file.close()
 

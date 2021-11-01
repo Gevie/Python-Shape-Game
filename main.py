@@ -26,14 +26,14 @@ for filename in glob.glob(path):
 
 class Drawing:
     @staticmethod
-    def clear_screen(colour: tuple = (0, 0, 0), width: int = 800, height: int = 600):
+    def clear_screen(colour: tuple = (0, 0, 0), width: int = 1920, height: int = 1080):
         pygame.draw.rect(SCREEN, colour, (0, 0, width, height))
 
     @staticmethod
     def draw_center_text(text: str):
         font = pygame.font.Font(None, 48)
         text = font.render(text, True, (255, 255, 255))
-        text_rect = text.get_rect(center=(400, 300))
+        text_rect = text.get_rect(center=(960, 540))
         SCREEN.blit(text, text_rect)
 
     @staticmethod
@@ -52,7 +52,7 @@ class Drawing:
     def draw_heading(text: str):
         font = pygame.font.Font(None, 48)
         text = font.render(text, True, (255, 255, 255))
-        text_rect = text.get_rect(center=(400, 50))
+        text_rect = text.get_rect(center=(960, 50))
         SCREEN.blit(text, text_rect)
 
 
@@ -109,15 +109,10 @@ def draw(drawing: Drawing, single_shape: bool = False) -> Shape:
 def draw_third_stage(drawing: Drawing) -> Shape:
     """Draw the next round screen and return the chosen shape"""
     drawing.clear_screen()
-
     random.shuffle(IAPS)
     figure = IAPS.pop()
-    # TODO: improve way to retrieve which image we are using
     image = pygame.image.load(figure)
     SCREEN.blit(image, (0, 0))
-    #figure = figure.replace('./IAPS\\', '')
-    #figure = figure.replace('.jpeg', '')
-    #iap = int(figure)
     im = Image.open(filename)
     iap = im.filename
     return iap
@@ -130,29 +125,26 @@ def draw_whitespace(drawing: Drawing):
 
 shapes = load_shapes()
 positions = ["top_left", "top_right", "bottom_left", "bottom_right"]
-# TODO: make inputs nicer
-subject_ID = input('Insert Subject ID')
-subject = Subject(subject_ID, date.today(), {})
+subject_ID = input('Insert Subject ID: \n')
+today = date.today()
+day = today.strftime("%d/%m/%Y")
+subject = Subject(subject_ID, day, {})
 subject.create_data_template()
 Round = Round(['Game', 'SingleChoiceGame', 'Stimulation'], 1, 0, 12, 'Game', 'Baseline')
 SimpleRecording = SimpleRecording()
 Instance = Instance(subject, SimpleRecording, Round)
 
-
 start = 0
 while start == 0:
-    start = input('Ready to start the window? (1 - yes, 0 - no)')
+    start = input('Ready to start the window? (1 - yes, 0 - no): \n')
 
-# TODO: windows needs to be fullscreened
 pygame.init()
-SCREEN = pygame.display.set_mode((800, 600))
+SCREEN = pygame.display.set_mode((1920, 1080))
 
 position_right = 0
 while position_right == 0:
-    position_right = input('Is the window correctly positioned? (1 - yes, 0 - no)')
-time.sleep(5)
+    position_right = input('Is the window correctly positioned? (1 - yes, 0 - no): \n')
 
-# TODO: Build structure / classes to handle events better
 generate_new_round = pygame.USEREVENT + 1
 pygame.time.set_timer(generate_new_round, 5000)
 
@@ -163,7 +155,6 @@ whitespace_rounds = [25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46,
 drawing = Drawing()
 last_shape = None
 winning_shape = draw(drawing)
-#single_shape = draw(drawing, True)
 clickable = True
 
 
@@ -178,18 +169,20 @@ while True:
 
             if current_round > 81:
                 Instance.save_results()
-                draw_end_game()
+                draw_end_game(drawing)
             if current_round <= 12:
                 Round.set_stage('Game')
                 clickable = True
                 winning_shape = draw(drawing, False)
                 last_shape = winning_shape.type
+                Instance.add_timestamp()
                 continue
             if 12 < current_round <= 24:
                 Round.set_stage('SingleChoiceGame')
                 clickable = True
                 single_shape = draw(drawing, True)
                 last_shape = single_shape.type
+                Instance.add_timestamp()
                 continue
 
         if events.type == pygame.MOUSEBUTTONDOWN and current_round <= 12 and clickable is True:
@@ -197,7 +190,6 @@ while True:
             if clicked == winning_shape.colour:
                 clickable = False
                 print(f"You clicked the {winning_shape.type} successfully.")
-                Instance.add_timestamp()
             continue
 
         if events.type == pygame.MOUSEBUTTONDOWN and 12 < current_round <= 24 and clickable is True:
@@ -205,19 +197,19 @@ while True:
             if clicked == single_shape.colour:
                 clickable = False
                 print(f"You clicked the {single_shape.type} successfully.")
-                Instance.add_timestamp()
             continue
 
         if 25 <= current_round <= 81:
             if current_round not in whitespace_rounds:
                 iap = draw_third_stage(drawing)
+                print(current_round)
                 Round.iap = iap
                 Round.switch_stimulation_type()
                 Instance.add_timestamp()
-                # TODO: figure out how many rounds there are gonna be
+                # TODO: figure out why not working dictionary add
+
             if current_round in whitespace_rounds:
                 Round.switch_stimulation_type()
-                Instance.add_timestamp()
                 draw_whitespace(drawing)
 
     pygame.display.update()
