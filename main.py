@@ -24,6 +24,69 @@ for filename in glob.glob(path):
     IAPS.append(filename)
 
 
+def get_iap(file):
+    if file == './IAPS\\1.jpg':
+        plus = '1'
+        return plus
+    if file == './IAPS\\2.jpg':
+        plus = '2'
+        return plus
+    if file == './IAPS\\3.jpg':
+        plus = '3'
+        return plus
+    if file == './IAPS\\4.jpg':
+        plus = '4'
+        return plus
+    if file == './IAPS\\5.jpg':
+        plus = '5'
+        return plus
+    if file == './IAPS\\6.jpg':
+        plus = '6'
+        return plus
+    if file == './IAPS\\7.jpg':
+        plus = '7'
+        return plus
+    if file == './IAPS\\8.jpg':
+        plus = '8'
+        return plus
+    if file == './IAPS\\9.jpg':
+        plus = '9'
+        return plus
+    if file == './IAPS\\10.jpg':
+        plus = '10'
+        return plus
+    if file == './IAPS\\11.jpg':
+        plus = '11'
+        return plus
+    if file == './IAPS\\12.jpg':
+        plus = '12'
+        return plus
+    if file == './IAPS\\13.jpg':
+        plus = '13'
+        return plus
+    if file == './IAPS\\14.jpg':
+        plus = '14'
+        return plus
+    if file == './IAPS\\15.jpg':
+        plus = '15'
+        return plus
+    if file == './IAPS\\16.jpg':
+        plus = '16'
+        return plus
+    if file == './IAPS\\17.jpg':
+        plus = '17'
+        return plus
+    if file == './IAPS\\18.jpg':
+        plus = '18'
+        return plus
+    if file == './IAPS\\19.jpg':
+        plus = '19'
+        return plus
+    if file == './IAPS\\20.jpg':
+        plus = '20'
+        return plus
+
+
 class Drawing:
     @staticmethod
     def clear_screen(colour: tuple = (0, 0, 0), width: int = 1920, height: int = 1080):
@@ -111,11 +174,10 @@ def draw_third_stage(drawing: Drawing) -> Shape:
     drawing.clear_screen()
     random.shuffle(IAPS)
     figure = IAPS.pop()
+    plus = get_iap(figure)
     image = pygame.image.load(figure)
     SCREEN.blit(image, (0, 0))
-    im = Image.open(filename)
-    iap = im.filename
-    return iap
+    return plus
 
 
 def draw_whitespace(drawing: Drawing):
@@ -130,7 +192,7 @@ today = date.today()
 day = today.strftime("%d/%m/%Y")
 subject = Subject(subject_ID, day, {})
 subject.create_data_template()
-Round = Round(['Game', 'SingleChoiceGame', 'Stimulation'], 1, '0', 24, 'Game', 'Baseline')
+Round = Round(['Game', 'SingleChoiceGame', 'Stimulation'], 1, '0', 81, 'Game')
 SimpleRecording = SimpleRecording()
 Instance = Instance(subject, SimpleRecording, Round)
 
@@ -156,7 +218,8 @@ drawing = Drawing()
 last_shape = None
 winning_shape = draw(drawing)
 clickable = True
-
+stage = 'Game'
+Instance.add_timestamp(current_round, stage)
 
 while True:
     for events in pygame.event.get():
@@ -175,14 +238,16 @@ while True:
                 clickable = True
                 winning_shape = draw(drawing, False)
                 last_shape = winning_shape.type
-                Instance.add_timestamp()
+                stage = 'Game'
+                Instance.add_timestamp(current_round, stage)
                 continue
             if 12 < current_round <= 24:
                 Round.set_stage('SingleChoiceGame')
                 clickable = True
                 single_shape = draw(drawing, True)
                 last_shape = single_shape.type
-                Instance.add_timestamp()
+                stage = 'Game'
+                Instance.add_timestamp(current_round, stage)
                 continue
 
         if events.type == pygame.MOUSEBUTTONDOWN and current_round <= 12 and clickable is True:
@@ -201,12 +266,17 @@ while True:
 
         if 25 <= current_round <= 81:
             if current_round not in whitespace_rounds:
-                iap = draw_third_stage(drawing)
-                Round.stage = 'Stimulation'
-                Instance.add_stim_timestamp(iap)
+                word = draw_third_stage(drawing)
+                popular = word
+                stage = 'Stimulation'
+                Instance.add_timestamp(popular, stage)
                 # TODO: figure out why not working dictionary add
+                pass
 
             if current_round in whitespace_rounds:
                 draw_whitespace(drawing)
+                stage = 'Baseline'
+                Instance.add_timestamp(current_round, stage)
+                pass
 
     pygame.display.update()

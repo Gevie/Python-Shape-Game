@@ -13,12 +13,11 @@ class Round:
     This class holds information about current round and all potential rounds
     """
 
-    allowed_stages: List = field(default_factory=lambda: ['Game', 'SingleChoiceGame', 'Stimulation'])
-    current_round: int = 1
+    allowed_stages: List = field(default_factory=lambda: ['Baseline', 'Game', 'SingleChoiceGame', 'Stimulation'])
+    current_round: int = 1 or str
     iap: str = '1'
-    max_rounds: int = 24
+    max_rounds: int = 81
     stage: str = 'Game'
-    stimulation_type: str = 'Baseline'
 
     def increment(self) -> None:
         """
@@ -27,11 +26,6 @@ class Round:
         Returns:
             None
         """
-
-        if self.max_rounds <= self.current_round:
-            self.current_round = 1
-            return None
-
         self.current_round = self.current_round + 1
 
     def set_stage(self, stage: str) -> None:
@@ -50,19 +44,6 @@ class Round:
 
         self.stage = stage
 
-    def switch_stimulation_type(self) -> None:
-        """
-        Switch the stimulation type from either IAPS{n} or Baseline
-
-        Returns:
-            None
-        """
-
-        if self.stimulation_type == 'Baseline':
-            self.stimulation_type = f'IAPS({self.iap})'
-        else:
-            self.stimulation_type = 'Baseline'
-
 
 @dataclass
 class Subject:
@@ -73,8 +54,8 @@ class Subject:
     the data for the test
     """
 
-    id: int
-    date: date
+    id: str
+    date: str
     data: dict
 
     def get_key(self):
@@ -99,14 +80,14 @@ class Subject:
             self.id: {
                 self.date: {
                     'Timestamps': {
-                        'Baseline': {}
-                    },
-                    'Stimulation': {}
+                        'Baseline': {},
+                        'Stimulation': {}
+                    }
                 }
             }
         }
 
-    def add_timestamp(self, current_round: Round, timestamp: str) -> None:
+    def add_timestamp(self, current_round: Round, words, stage, timestamp: str) -> None:
         """
         Stores the timestamp for a round against a round
 
@@ -117,18 +98,23 @@ class Subject:
         Returns:
             None
         """
-        fround = f'Q{current_round.current_round}'
-        self.data[self.id][self.date]['Timestamps']['Baseline'].update({fround: timestamp})
-        return None
-
-    def add_stim_timestamp(self, timestamp, iap):
-        fround = f'IAPS({iap})'
-        self.data[self.id][self.date]['Stimulation'].update({fround: timestamp})
+        if stage == 'Game':
+            self.data[self.id][self.date]['Timestamps']['Baseline'].update({f'Q{words}': timestamp})
+            #print(self.data)
+            pass
+        elif stage == 'Stimulation':
+            self.data[self.id][self.date]['Timestamps']['Stimulation'].update(
+                {f'IAPS({words})': timestamp})
+            #print(self.data)
+            pass
+        elif stage == 'Baseline':
+            self.data[self.id][self.date]['Timestamps']['Stimulation'].update({f'Baseline({words})': timestamp})
+            #print(self.data)
+            pass
 
     def save(self) -> None:
         """
         Save the subject data to the appropriate json file
-
         Returns:
             None
         """
@@ -148,9 +134,9 @@ class Instance:
 
     subject: Subject
     recording_handler: RecordingInterface
-    current_round: Round
+    Round: Round
 
-    def add_timestamp(self) -> None:
+    def add_timestamp(self, words, stage) -> None:
         """
         Add the timestamp to the subject
 
@@ -158,29 +144,12 @@ class Instance:
             None
         """
 
-        #if self.current_round.stage == 'Stimulation':
+        # if self.current_round.stage == 'Stimulation':
         #    self.current_round.switch_stimulation_type()
 
         timestamp = self.recording_handler.get_timestamp()
-        self.subject.add_timestamp(self.current_round, timestamp)
-
-        self.current_round.increment()  # TODO: Move this elsewhere
-
-    def add_stim_timestamp(self, iap) -> None:
-        """
-        Add the timestamp to the subject
-
-        Returns:
-            None
-        """
-
-        #if self.current_round.stage == 'Stimulation':
-        #    self.current_round.switch_stimulation_type()
-
-        timestamp = self.recording_handler.get_timestamp()
-        self.subject.add_stim_timestamp(timestamp, iap)
-
-        self.current_round.increment()  # TODO: Move this elsewhere
+        self.subject.add_timestamp(self.Round, words, stage, timestamp)
+        self.Round.increment()  # TODO: Move this elsewhere
 
     def save_results(self) -> None:
         """
