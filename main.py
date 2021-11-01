@@ -130,7 +130,7 @@ today = date.today()
 day = today.strftime("%d/%m/%Y")
 subject = Subject(subject_ID, day, {})
 subject.create_data_template()
-Round = Round(['Game', 'SingleChoiceGame', 'Stimulation'], 1, 0, 12, 'Game', 'Baseline')
+Round = Round(['Game', 'SingleChoiceGame', 'Stimulation'], 1, '0', 24, 'Game', 'Baseline')
 SimpleRecording = SimpleRecording()
 Instance = Instance(subject, SimpleRecording, Round)
 
@@ -202,14 +202,11 @@ while True:
         if 25 <= current_round <= 81:
             if current_round not in whitespace_rounds:
                 iap = draw_third_stage(drawing)
-                print(current_round)
-                Round.iap = iap
-                Round.switch_stimulation_type()
-                Instance.add_timestamp()
+                Round.stage = 'Stimulation'
+                Instance.add_stim_timestamp(iap)
                 # TODO: figure out why not working dictionary add
 
             if current_round in whitespace_rounds:
-                Round.switch_stimulation_type()
                 draw_whitespace(drawing)
 
     pygame.display.update()
