@@ -100,16 +100,16 @@ class Subject:
         """
         if stage == 'Game':
             self.data[self.id][self.date]['Timestamps']['Baseline'].update({f'Q{words}': timestamp})
-            #print(self.data)
+            # print(self.data)
             pass
         elif stage == 'Stimulation':
             self.data[self.id][self.date]['Timestamps']['Stimulation'].update(
                 {f'IAPS({words})': timestamp})
-            #print(self.data)
+            # print(self.data)
             pass
         elif stage == 'Baseline':
             self.data[self.id][self.date]['Timestamps']['Stimulation'].update({f'Baseline({words})': timestamp})
-            #print(self.data)
+            # print(self.data)
             pass
 
     def save(self) -> None:
@@ -119,9 +119,11 @@ class Subject:
             None
         """
 
-        subject_file = open('timestamps.json', 'w')
-        json.dump(self.data, subject_file, ensure_ascii=False, indent='\t', separators=(',', ':'))
-        subject_file.close()
+        with open('timestamps.json', 'r') as file:
+            subject_file = json.load(file)
+        subject_file.update(self.data)
+        with open('timestamps.json', 'w') as final_file:
+            json.dump(subject_file, final_file)
 
 
 @dataclass
