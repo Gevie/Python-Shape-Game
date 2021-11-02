@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="821dbbda-ce09-4c1f-b8e0-d71961b8bea2" name="Changes" comment="IT FINALLY FUCKING WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!">
+    <list default="true" id="821dbbda-ce09-4c1f-b8e0-d71961b8bea2" name="Changes" comment="It also writes to the timestamps.json without overwritting">
+      <change afterPath="$PROJECT_DIR$/biosignals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plux/Win64/LibFT4222-64.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plux/Win64/LibFT4222AB-64.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plux/Win64/msvcp100.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plux/Win64/msvcr100.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plux/Win64/plux.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subject.py" beforeDir="false" afterPath="$PROJECT_DIR$/subject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timestamps.json" beforeDir="false" afterPath="$PROJECT_DIR$/timestamps.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +31,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/plux" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\full gevie repo\Python-Shape-Game\plux" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -164,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635794618715</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="It also writes to the timestamps.json without overwritting">
+      <created>1635800137343</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1635800137343</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,6 +222,7 @@
     <MESSAGE value="Everything working except for the stimulation timestamps not writing to the json. check TODO" />
     <MESSAGE value="still trying to fix dict not writing. Gevie's class has some sort of error, need to find it, so I will rewrite the subject.py file" />
     <MESSAGE value="IT FINALLY FUCKING WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="IT FINALLY FUCKING WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" />
+    <MESSAGE value="It also writes to the timestamps.json without overwritting" />
+    <option name="LAST_COMMIT_MESSAGE" value="It also writes to the timestamps.json without overwritting" />
   </component>
 </project>
