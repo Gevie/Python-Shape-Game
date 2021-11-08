@@ -2,8 +2,6 @@ import platform
 import sys
 from dataclasses import dataclass, field
 
-import plux
-
 osDic = {"Darwin": "MacOS",
          "Linux": "Linux64",
          "Windows": ("Win32_37", "Win64_37")}
@@ -15,6 +13,8 @@ else:
     else:
         sys.path.append("PLUX-API-Python3/Win32_37")
 
+import plux
+
 
 @dataclass
 class Device:
@@ -23,7 +23,7 @@ class Device:
     Defaults to port 1
     """
 
-    source: str
+    source: int
 
     def set_port(self, source: int):
         self.source = source
@@ -34,26 +34,25 @@ class Session(Device):
     """
     Stores session data in a dict
     """
-    Device: Device
-    Session_Data: dict
+    session_data: dict
     sampling_frequency: int = 1200
-    Resolution: int = 16
-    Allowed_Resolutions: list = field(default_factory=lambda: [8, 16])
-    Allowed_Settings: list = field(default_factory=lambda: ['fs', 'res', 'source'])
+    resolution: int = 16
+    allowed_resolutions: list = field(default_factory=lambda: [8, 16])
+    allowed_settings: list = field(default_factory=lambda: ['fs', 'res', 'source'])
 
     def prepare_dict(self):
         """
         Initializes the dictionary where the session's settings
         are stored.
         """
-        self.Session_Data = {
+        self.session_data = {
             'fs': self.sampling_frequency,
             'source': Device.source,
-            'res': self.Resolution
+            'res': self.resolution
         }
 
     def update_dict(self, setting: str, value: int):
-        if setting not in self.Allowed_Settings:
+        if setting not in self.allowed_settings:
             raise ValueError('The setting introduced is not allowed')
         else:
             if setting == 'fs':
@@ -61,14 +60,25 @@ class Session(Device):
             elif setting == 'source':
                 Device.set_port(self, value)
             else:
-                if value not in self.Allowed_Resolutions:
+                if value not in self.allowed_resolutions:
                     raise ValueError('This is not an allowed resolution')
-                self.Resolution = value
-        self.Session_Data[setting] = value
+                self.resolution = value
+        self.session_data[setting] = value
 
 
 @dataclass
 class Recording(Session):
     """
-    Handles the management o the Biosignals Plux recording session
+    Handles the management of the Biosignals Plux recording session
     """
+
+    fs = Session.session_data['fs']
+    source = Session.session_data['source']
+    res = Session.session_data['res']
+
+    def eeg_start(self):
+        plux.SignalsDev.start(self.fs, self.source, self.res)
+
+    @staticmethod
+    def eeg_stop(self):
+        plux.SignalsDev.stop()

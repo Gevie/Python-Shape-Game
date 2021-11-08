@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="821dbbda-ce09-4c1f-b8e0-d71961b8bea2" name="Changes" comment="It also writes to the timestamps.json without overwritting">
-      <change afterPath="$PROJECT_DIR$/biosignals.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plux/Win64/LibFT4222-64.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plux/Win64/LibFT4222AB-64.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plux/Win64/msvcp100.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plux/Win64/msvcr100.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plux/Win64/plux.pyd" afterDir="false" />
+    <list default="true" id="821dbbda-ce09-4c1f-b8e0-d71961b8bea2" name="Changes" comment="Integrating Biosignals Plux into the session recording chain, goalposts moved again, but no biggie.">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biosignals.py" beforeDir="false" afterPath="$PROJECT_DIR$/biosignals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timestamps.json" beforeDir="false" afterPath="$PROJECT_DIR$/timestamps.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +15,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="datacollect" />
+        <entry key="$PROJECT_DIR$" value="fix_noob'sturn" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -181,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635800137343</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Integrating Biosignals Plux into the session recording chain, goalposts moved again, but no biggie.">
+      <created>1635871208867</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1635871208867</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -223,6 +227,7 @@
     <MESSAGE value="still trying to fix dict not writing. Gevie's class has some sort of error, need to find it, so I will rewrite the subject.py file" />
     <MESSAGE value="IT FINALLY FUCKING WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" />
     <MESSAGE value="It also writes to the timestamps.json without overwritting" />
-    <option name="LAST_COMMIT_MESSAGE" value="It also writes to the timestamps.json without overwritting" />
+    <MESSAGE value="Integrating Biosignals Plux into the session recording chain, goalposts moved again, but no biggie." />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrating Biosignals Plux into the session recording chain, goalposts moved again, but no biggie." />
   </component>
 </project>
