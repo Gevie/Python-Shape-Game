@@ -24,5 +24,6 @@ class TestBioSignals(unittest.TestCase):
     def test_eeg_stop(self):
         Recording.eeg_stop()
 
+
 if __name__ == '__main__':
     unittest.main
