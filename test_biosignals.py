@@ -2,6 +2,12 @@ import unittest
 from biosignals import Session
 from biosignals import Device
 from biosignals import Recording
+from dataclasses import dataclass, field
+
+
+Device(1)
+Session(1200, {}, 16, field(default_factory=lambda: [8, 16]), field(default_factory=lambda: ['fs', 'res', 'source']))
+Recording(1200, {}, 16)
 
 
 class TestBioSignals(unittest.TestCase):
@@ -12,7 +18,7 @@ class TestBioSignals(unittest.TestCase):
         self.assertIsNotNone(Device.source)
 
     def test_prepare_dict(self):
-        Session.prepare_dict()
+        Session.prepare_dict(Session)
         self.assertIsNotNone(Session.session_data)
 
     def test_update_dict(self):
