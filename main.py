@@ -8,7 +8,7 @@ import loader
 from shape import Rectangle, Circle, Triangle, Parallelogram, Shape
 from PIL import Image
 import glob
-from recording import SimpleRecording
+from recording import SimpleRecording, BioPlusRecording
 from subject import Round
 from subject import Instance
 from subject import Subject
