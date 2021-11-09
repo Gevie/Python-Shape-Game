@@ -13,6 +13,8 @@ from subject import Round
 from subject import Instance
 from subject import Subject
 from datetime import date
+from biosignals import Device, Session, Recording
+from dataclasses import field
 import time
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -193,7 +195,13 @@ day = today.strftime("%d/%m/%Y")
 subject = Subject(subject_ID, day, {})
 subject.create_data_template()
 Round = Round(['Game', 'SingleChoiceGame', 'Stimulation'], 1, '0', 81, 'Game')
+eeg_device = Device(1)
+eeg_session = Session(1200, {}, 16, field(default_factory=lambda: [8, 16]), field(default_factory=lambda: ['fs', 'res',
+                                                                                                           'source']))
+eeg_session.prepare_dict()
+eeg = Recording(eeg_session)
 SimpleRecording = SimpleRecording()
+# BioPlusRecording = BioPlusRecording()
 Instance = Instance(subject, SimpleRecording, Round)
 
 start = 0
