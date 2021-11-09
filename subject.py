@@ -1,7 +1,7 @@
 import json
 from dataclasses import dataclass, field
 from datetime import date
-from recording import RecordingInterface
+from recording import RecordingInterface, BioPlusRecording
 from typing import List
 
 
@@ -136,6 +136,7 @@ class Instance:
 
     subject: Subject
     recording_handler: RecordingInterface
+    # recording_handler: BioPlusRecording
     Round: Round
 
     def add_timestamp(self, words, stage) -> None:
