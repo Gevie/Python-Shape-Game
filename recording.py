@@ -1,5 +1,6 @@
 import time
 from abc import ABC, abstractmethod
+from biosignals import Recording
 
 
 class RecordingInterface(ABC):
@@ -87,8 +88,8 @@ class BioPlusRecording(RecordingInterface):
         """
         Initialize the class
         """
-
         # bp.start()
+        Recording.eeg_start()
         pass
 
     def get_timestamp(self) -> str:
@@ -111,4 +112,5 @@ class BioPlusRecording(RecordingInterface):
         """
 
         # bp.stop()
+        Recording.eeg_stop()
         pass
