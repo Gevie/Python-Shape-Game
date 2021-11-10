@@ -88,8 +88,9 @@ class BioPlusRecording(RecordingInterface):
         """
         Initialize the class
         """
+        self.recording = Recording()
         # bp.start()
-        Recording.eeg_start()
+        self.recording.eeg_start()
         pass
 
     def get_timestamp(self) -> str:

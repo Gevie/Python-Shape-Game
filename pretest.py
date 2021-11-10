@@ -1,7 +1,7 @@
 from biosignals import Device, Session, Recording
 from recording import BioPlusRecording
 import time
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 # TODO: prepare to open log files for recordings
@@ -10,11 +10,10 @@ import matplotlib.pyplot as plt
 '''
 Initializing all of the necessary classes
 '''
-eeg_device = Device(1)
-eeg_session = Session(1200, {}, 16, field(default_factory=lambda: [8, 16]), field(default_factory=lambda: ['fs', 'res',
-                                                                                                           'source']))
+eeg_device = Device()
+eeg_session = Session()
 eeg_session.prepare_dict()
-eeg = Recording(eeg_session)
+eeg = Recording()
 BioPlusRecording = BioPlusRecording()
 time.sleep(20)
 BioPlusRecording.tear_down()
