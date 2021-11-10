@@ -1,21 +1,22 @@
+import glob
 import json
 import os
 import random
 import sys
+from dataclasses import field
+from datetime import date
+
 import pygame
+from PIL import Image
+
 import factory
 import loader
-from shape import Rectangle, Circle, Triangle, Parallelogram, Shape
-from PIL import Image
-import glob
-from recording import SimpleRecording
-from subject import Round
-from subject import Instance
-from subject import Subject
-from datetime import date
 from biosignals import Device, Session, Recording
-from dataclasses import field
-import time
+from recording import SimpleRecording
+from shape import Rectangle, Circle, Triangle, Parallelogram, Shape
+from subject import Instance
+from subject import Round
+from subject import Subject
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
