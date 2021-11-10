@@ -1,6 +1,8 @@
 import platform
 import sys
 from dataclasses import dataclass, field
+import plux
+
 
 osDic = {"Darwin": "MacOS",
          "Linux": "Linux64",
@@ -13,7 +15,6 @@ else:
     else:
         sys.path.append("PLUX-API-Python3/Win32_37")
 
-import plux
 
 
 @dataclass
@@ -23,7 +24,7 @@ class Device:
     Defaults to port 1
     """
 
-    source: int
+    source: int = 1
 
     def set_port(self, source: int):
         self.source = source
@@ -34,7 +35,7 @@ class Session(Device):
     """
     Stores session data in a dict
     """
-    session_data: dict
+    session_data: dict = field(default_factory=dict)
     sampling_frequency: int = 1200
     resolution: int = 16
     allowed_resolutions: list = field(default_factory=lambda: [8, 16])
@@ -72,13 +73,14 @@ class Recording(Session):
     Handles the management of the Biosignals Plux recording session
     """
 
-    fs = Session.session_data['fs']
-    source = Session.session_data['source']
-    res = Session.session_data['res']
+    session = Session()
 
     def eeg_start(self):
-        plux.SignalsDev.start(self.fs, self.source, self.res)
+        plux.SignalsDev.start(
+            self.session.session_data['fs'],
+            self.session.session_data['source'],
+            self.session.session_data['res'])
 
     @staticmethod
-    def eeg_stop(self):
+    def eeg_stop():
         plux.SignalsDev.stop()
