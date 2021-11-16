@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="821dbbda-ce09-4c1f-b8e0-d71961b8bea2" name="Changes" comment="IT FINALLY FUCKING WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subject.py" beforeDir="false" afterPath="$PROJECT_DIR$/subject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timestamps.json" beforeDir="false" afterPath="$PROJECT_DIR$/timestamps.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="datacollect" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="20FhduLCyaK8WlDmaik1OZCWH8V" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Shapes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="821dbbda-ce09-4c1f-b8e0-d71961b8bea2" name="Changes" comment="" />
+      <created>1635646336035</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635646336035</updated>
+    </task>
+    <task id="LOCAL-00001" summary="fixed most of the mistakes referenced in the last pull review. I think I fixed the error for the default argument for subject but not timestamp. removed print statements, Gevie, check the new TODO's">
+      <created>1635646919200</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1635646919200</updated>
+    </task>
+    <task id="LOCAL-00002" summary="introduced new draw(True) methodology into while loop">
+      <created>1635691402716</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1635691402716</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fixed IAPS list remaking itself continuously">
+      <created>1635692362452</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1635692362452</updated>
+    </task>
+    <task id="LOCAL-00004" summary="starting to implement subject.py into main.py">
+      <created>1635697634888</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1635697634888</updated>
+    </task>
+    <task id="LOCAL-00005" summary="testing how filename is retrieved">
+      <created>1635697901522</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1635697901522</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixed how we retrieve iap. introduced that into the loop">
+      <created>1635698718891</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1635698718891</updated>
+    </task>
+    <task id="LOCAL-00007" summary="FUCKIN GOT THE GAME RUNNING SUCK IT PYTHON">
+      <created>1635700242252</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1635700242252</updated>
+    </task>
+    <task id="LOCAL-00008" summary="got the window running, made some rudimentary ui, which isn't working">
+      <created>1635701256706</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1635701256706</updated>
+    </task>
+    <task id="LOCAL-00009" summary="got the window running, made some rudimentary ui, which isn't working">
+      <created>1635701345043</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1635701345043</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fixed it, I fucking fixed it. Queue &quot;Sonubitch, he did it, he really did it&quot;">
+      <created>1635703143516</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1635703143516</updated>
+    </task>
+    <task id="LOCAL-00011" summary="got program running in full. look at TODOs">
+      <created>1635707187040</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1635707187040</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Everything working except for the stimulation timestamps not writing to the json. check TODO">
+      <created>1635768761089</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1635768761089</updated>
+    </task>
+    <task id="LOCAL-00013" summary="still trying to fix dict not writing. Gevie's class has some sort of error, need to find it, so I will rewrite the subject.py file">
+      <created>1635778625194</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1635778625194</updated>
+    </task>
+    <task id="LOCAL-00014" summary="IT FINALLY FUCKING WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!">
+      <created>1635794618715</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1635794618715</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="fix_noob'sturn" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed most of the mistakes referenced in the last pull review. I think I fixed the error for the default argument for subject but not timestamp. removed print statements, Gevie, check the new TODO's" />
+    <MESSAGE value="introduced new draw(True) methodology into while loop" />
+    <MESSAGE value="fixed IAPS list remaking itself continuously" />
+    <MESSAGE value="starting to implement subject.py into main.py" />
+    <MESSAGE value="testing how filename is retrieved" />
+    <MESSAGE value="fixed how we retrieve iap. introduced that into the loop" />
+    <MESSAGE value="FUCKIN GOT THE GAME RUNNING SUCK IT PYTHON" />
+    <MESSAGE value="got the window running, made some rudimentary ui, which isn't working" />
+    <MESSAGE value="fixed it, I fucking fixed it. Queue &quot;Sonubitch, he did it, he really did it&quot;" />
+    <MESSAGE value="got program running in full. look at TODOs" />
+    <MESSAGE value="Everything working except for the stimulation timestamps not writing to the json. check TODO" />
+    <MESSAGE value="still trying to fix dict not writing. Gevie's class has some sort of error, need to find it, so I will rewrite the subject.py file" />
+    <MESSAGE value="IT FINALLY FUCKING WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="IT FINALLY FUCKING WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" />
+  </component>
+</project>
